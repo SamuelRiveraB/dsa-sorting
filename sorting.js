@@ -66,3 +66,34 @@ function insertionSort(array) {
 }
 
 console.log(insertionSort(numbers));
+
+function mergeSort(array) {
+  if (array.length === 1) {
+    return array;
+  }
+
+  const middle = Math.floor(array.length / 2);
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  const res = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      res.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      res.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  return res.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+
+console.log(mergeSort(numbers));
